@@ -95,6 +95,7 @@ export default function Header() {
                 width: "100%",
                 height: "100vh",
                 background: "var(--bw-bg)",
+                backgroundImage: "var(--bw-gradient-main)",
                 zIndex: 300,
                 display: mobileMenuOpen ? "flex" : "none",
                 flexDirection: "column",

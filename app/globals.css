@@ -24,6 +24,16 @@
   --section-spacing: 160px;
   --container-width: 1240px;
   --container-header: 1440px;
+
+  /* New Bluewave Purple Accents */
+  --bw-purple: #A855F7;
+  --bw-purple-glow: rgba(168, 85, 247, 0.2);
+  --bw-purple-deep: #4c1d95;
+
+  --bw-gradient-main: radial-gradient(circle at 50% -20%, var(--bw-teal-deep) 0%, transparent 50%),
+    radial-gradient(circle at 80% 40%, var(--bw-purple-glow) 0%, transparent 45%),
+    radial-gradient(circle at 20% 60%, var(--bw-blue-void) 0%, transparent 40%),
+    radial-gradient(circle at 50% 110%, var(--bw-teal-deep) 0%, transparent 50%);
 }
 
 * {
@@ -49,12 +59,9 @@ body {
   position: relative;
   min-height: 100vh;
   background-color: var(--bw-bg);
-  background-image:
-    radial-gradient(circle at 50% -10%, var(--bw-teal-deep) 0%, transparent 45%),
-    radial-gradient(circle at 90% 40%, var(--bw-blue-void) 0%, transparent 40%),
-    linear-gradient(135deg, rgba(0, 247, 255, 0.144) 0%, transparent 30%),
-    linear-gradient(225deg, rgba(0, 247, 255, 0.151) 0%, transparent 25%);
+  background-image: var(--bw-gradient-main);
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 .bg-atmosphere {
@@ -78,29 +85,29 @@ body {
 .blob-hero-top {
   width: 70vw;
   height: 70vw;
-  background: radial-gradient(circle, var(--bw-cyan-glow), transparent 75%);
+  background: radial-gradient(circle, var(--bw-purple), transparent 75%);
   top: -35vh;
   left: 50vw;
   transform: translateX(-50%);
-  opacity: 0.25;
+  opacity: 0.15;
 }
 
 .blob-mid-right {
   width: 45vw;
   height: 45vw;
-  background: radial-gradient(circle, rgba(0, 246, 255, 0.12), transparent 70%);
+  background: radial-gradient(circle, var(--bw-accent), transparent 70%);
   top: 110vh;
   right: -10vw;
-  opacity: 0.18;
+  opacity: 0.12;
 }
 
 .blob-bottom-left {
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(circle, rgba(0, 149, 255, 0.774), transparent 70%);
+  background: radial-gradient(circle, var(--bw-purple-deep), transparent 70%);
   bottom: -15vh;
   left: -15vw;
-  opacity: 0.15;
+  opacity: 0.1;
 }
 
 /* Precision Typography (Protocol Aesthetic) */
@@ -216,9 +223,10 @@ section {
 }
 
 .btn-primary {
-  background: var(--bw-accent);
+  background: linear-gradient(135deg, #0088FF 0%, #00F6FF 100%);
   color: var(--bw-bg);
   box-shadow: 0 12px 45px rgba(0, 246, 255, 0.28);
+  border: none;
 }
 
 .btn-primary:hover {
@@ -243,18 +251,26 @@ section {
 /* Precision Header Architecture */
 .header {
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: var(--container-header);
   z-index: 200;
-  padding: 32px 0;
+  padding: 16px 32px;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--bw-glass-border);
+  border-radius: 99px;
 }
 
 .header-scrolled {
-  padding: 24px 0;
-  background: rgba(11, 15, 20, 0.72);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--bw-glass-border);
+  top: 12px;
+  padding: 12px 32px;
+  background: rgba(11, 15, 20, 0.75);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .logo {

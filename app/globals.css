@@ -25,15 +25,11 @@
   --container-width: 1240px;
   --container-header: 1440px;
 
-  /* New Bluewave Purple Accents */
-  --bw-purple: #A855F7;
-  --bw-purple-glow: rgba(168, 85, 247, 0.2);
-  --bw-purple-deep: #4c1d95;
-
-  --bw-gradient-main: radial-gradient(circle at 50% -20%, var(--bw-teal-deep) 0%, transparent 50%),
-    radial-gradient(circle at 80% 40%, var(--bw-purple-glow) 0%, transparent 45%),
-    radial-gradient(circle at 20% 60%, var(--bw-blue-void) 0%, transparent 40%),
-    radial-gradient(circle at 50% 110%, var(--bw-teal-deep) 0%, transparent 50%);
+  /* Bluewave Atmospheric System (Refined Cyan/Blue) */
+  --bw-gradient-main: radial-gradient(circle at 50% -20%, var(--bw-teal-deep) 0%, transparent 60%),
+    radial-gradient(circle at 80% 40%, rgba(0, 246, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 60%, rgba(0, 136, 255, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 110%, var(--bw-teal-deep) 0%, transparent 60%);
 }
 
 * {
@@ -83,31 +79,34 @@ body {
 }
 
 .blob-hero-top {
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, var(--bw-purple), transparent 75%);
-  top: -35vh;
+  width: 90vw;
+  height: 90vw;
+  background: radial-gradient(circle, var(--bw-cyan-glow), transparent 75%);
+  top: -45vh;
   left: 50vw;
   transform: translateX(-50%);
-  opacity: 0.15;
+  opacity: 0.35;
+  /* Increased visibility */
 }
 
 .blob-mid-right {
-  width: 45vw;
-  height: 45vw;
+  width: 60vw;
+  height: 60vw;
   background: radial-gradient(circle, var(--bw-accent), transparent 70%);
-  top: 110vh;
-  right: -10vw;
-  opacity: 0.12;
+  top: 100vh;
+  right: -15vw;
+  opacity: 0.25;
+  /* Increased visibility */
 }
 
 .blob-bottom-left {
-  width: 55vw;
-  height: 55vw;
-  background: radial-gradient(circle, var(--bw-purple-deep), transparent 70%);
-  bottom: -15vh;
-  left: -15vw;
-  opacity: 0.1;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(0, 136, 255, 0.8), transparent 70%);
+  bottom: -20vh;
+  left: -20vw;
+  opacity: 0.22;
+  /* Increased visibility */
 }
 
 /* Precision Typography (Protocol Aesthetic) */
@@ -271,6 +270,16 @@ section {
   padding: 12px 32px;
   background: rgba(11, 15, 20, 0.75);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .header {
+    top: 12px;
+    width: calc(100% - 24px);
+    padding: 12px 20px;
+    border-radius: 20px;
+    /* Sleeker for mobile */
+  }
 }
 
 .logo {

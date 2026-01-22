@@ -19,6 +19,18 @@ export default function Hero() {
       <Container style={{ height: "100%", display: "flex", alignItems: "center" }}>
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
 
+          <div className="hero-visual-anchor">
+            <div className="globe-container">
+              <div className="globe">
+                <div className="ring ring-1"></div>
+                <div className="ring ring-2"></div>
+                <div className="ring ring-3"></div>
+                <div className="ring ring-4"></div>
+                <div className="core-glow"></div>
+              </div>
+            </div>
+          </div>
+
           <div className="hero-content-stack" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
 
             <h1 className="hero-main-title" style={{ marginTop: "0", marginBottom: "40px" }}>
@@ -72,63 +84,97 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hero-visual-anchor" style={{ position: "relative", height: "100%", display: "flex", alignItems: "center" }}>
-            <div className="glass-panel" style={{
-              height: "380px",
-              width: "115%",
-              transform: "perspective(2000px) rotateY(-15deg) rotateX(10deg) skewY(-2deg)",
-              boxShadow: "0 80px 160px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.08)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0, 246, 255, 0.015) 100%)",
-              marginLeft: "-10%",
-              overflow: "hidden"
-            }}>
-              <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                <Image
-                  src="/protocol-visual.png"
-                  alt="Protocol Presence Ledger"
-                  fill
-                  style={{ objectFit: "cover", opacity: 0.8 }}
-                />
-
-                {/* Protocol Overlay Tag */}
-                <div style={{
-                  position: "absolute",
-                  bottom: "32px",
-                  left: "32px",
-                  background: "rgba(11, 15, 20, 0.6)",
-                  backdropFilter: "blur(12px)",
-                  padding: "12px 20px",
-                  borderRadius: "8px",
-                  border: "1px solid var(--bw-glass-border)",
-                  zIndex: 2
-                }}>
-                  <span style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.2em", color: "var(--bw-accent)", fontWeight: 600 }}>
-                    Presence Ledger Alpha
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Contextual Shadow Glow */}
-            <div style={{
-              position: "absolute",
-              top: "50%",
-              left: "45%",
-              transform: "translate(-50%, -50%)",
-              width: "450px",
-              height: "450px",
-              background: "var(--bw-accent)",
-              filter: "blur(200px)",
-              opacity: 0.12,
-              zIndex: -1
-            }}></div>
-          </div>
-
         </div>
       </Container>
+      <style jsx>{`
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content-stack {
+            order: 1;
+        }
+
+        .hero-visual-anchor {
+            order: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 3D GLOBE ENGINE */
+        .globe-container {
+            width: 400px;
+            height: 400px;
+            perspective: 1200px;
+            animation: floatMesh 7s ease-in-out infinite;
+        }
+
+        .globe {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateMesh 25s linear infinite;
+        }
+
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(0, 246, 255, 0.5); /* Cyan */
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.2);
+        }
+
+        .ring-1 { width: 380px; height: 380px; transform: translate(-50%, -50%) rotateY(0deg); }
+        .ring-2 { width: 360px; height: 360px; transform: translate(-50%, -50%) rotateY(60deg); border-color: rgba(0, 136, 255, 0.4); } /* Blue-ish */
+        .ring-3 { width: 360px; height: 360px; transform: translate(-50%, -50%) rotateY(-60deg); border-color: rgba(0, 246, 255, 0.4); }
+        .ring-4 { width: 400px; height: 400px; transform: translate(-50%, -50%) rotateX(90deg); border: 1px dashed rgba(255, 255, 255, 0.2); } /* Equator */
+
+        .core-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(0,246,255,0.4) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 60px;
+            }
+
+            .hero-visual-anchor {
+                order: 1 !important; /* Mobile: Globe FIRST */
+                margin-bottom: 20px;
+            }
+
+            .hero-content-stack {
+                order: 2 !important; /* Mobile: Text SECOND */
+                align-items: center !important;
+            }
+
+            .globe-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .ring-1 { width: 260px; height: 260px; }
+            .ring-2 { width: 240px; height: 240px; }
+            .ring-3 { width: 240px; height: 240px; }
+            .ring-4 { width: 280px; height: 280px; }
+        }
+       `}</style>
     </section>
   );
 }

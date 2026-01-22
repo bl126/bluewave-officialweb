@@ -65,7 +65,7 @@ export default function Builders({ onApply }: { onApply?: () => void }) {
                                     filter: "blur(12px)"
                                 }}></div>
                             </div>
-                            <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center", marginBottom: "8px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "flex-start", marginBottom: "8px" }}>
                                 <div style={{ fontSize: "20px", fontWeight: "600", color: "#FFF" }}>Reuben Ezema</div>
                                 <a href="https://x.com/Reuben_TON" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "24px", height: "24px", background: "rgba(255,255,255,0.05)", borderRadius: "50%", border: "1px solid rgba(255,255,255,0.1)", transition: "all 0.3s ease" }}>
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

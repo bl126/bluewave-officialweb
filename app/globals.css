@@ -85,18 +85,18 @@ body {
   top: -45vh;
   left: 50vw;
   transform: translateX(-50%);
-  opacity: 0.35;
-  /* Increased visibility */
+  opacity: 0.55;
+  /* Boosted for desktop & mobile */
 }
 
 .blob-mid-right {
-  width: 60vw;
-  height: 60vw;
+  width: 65vw;
+  height: 65vw;
   background: radial-gradient(circle, var(--bw-accent), transparent 70%);
   top: 100vh;
   right: -15vw;
-  opacity: 0.25;
-  /* Increased visibility */
+  opacity: 0.45;
+  /* Boosted accessibility */
 }
 
 .blob-bottom-left {
@@ -105,8 +105,31 @@ body {
   background: radial-gradient(circle, rgba(0, 136, 255, 0.8), transparent 70%);
   bottom: -20vh;
   left: -20vw;
-  opacity: 0.22;
-  /* Increased visibility */
+  opacity: 0.35;
+  /* Boosted accessibility */
+}
+
+/* 3D Mesh Animation Engine */
+@keyframes rotateMesh {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes floatMesh {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* Precision Typography (Protocol Aesthetic) */

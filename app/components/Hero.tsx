@@ -22,9 +22,17 @@ export default function Hero() {
           <div className="hero-visual-anchor">
             <div className="mesh-container">
               <div className="mesh-3d">
-                <div className="mesh-ring ring-1"></div>
-                <div className="mesh-ring ring-2"></div>
-                <div className="mesh-ring ring-3"></div>
+                {/* Longitudinal Rings */}
+                <div className="mesh-ring ring-v-1"></div>
+                <div className="mesh-ring ring-v-2"></div>
+                <div className="mesh-ring ring-v-3"></div>
+                {/* Latitudinal Rings */}
+                <div className="mesh-ring ring-h-1"></div>
+                <div className="mesh-ring ring-h-2"></div>
+                {/* Orbit Rings */}
+                <div className="mesh-orbit orbit-1"></div>
+                <div className="mesh-orbit orbit-2"></div>
+
                 <div className="mesh-sphere"></div>
                 <div className="mesh-glow"></div>
               </div>
@@ -107,21 +115,22 @@ export default function Hero() {
         }
 
         .mesh-container {
-            width: 500px;
-            height: 500px;
+            width: 480px;
+            height: 480px;
             position: relative;
-            perspective: 1000px;
+            perspective: 1200px;
             display: flex;
             justify-content: center;
             align-items: center;
+            aspect-ratio: 1 / 1;
         }
 
         .mesh-3d {
-            width: 320px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             position: relative;
             transform-style: preserve-3d;
-            animation: rotateMesh 20s linear infinite, floatMesh 6s ease-in-out infinite;
+            animation: rotateGlobe 30s linear infinite;
         }
 
         .mesh-ring {
@@ -130,27 +139,53 @@ export default function Hero() {
             left: 0;
             width: 100%;
             height: 100%;
-            border: 1px solid rgba(0, 246, 255, 0.15);
+            border: 1px solid rgba(0, 246, 255, 0.2);
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 246, 255, 0.05);
+            pointer-events: none;
         }
 
-        .ring-1 { transform: rotateX(70deg) rotateY(0deg); }
-        .ring-2 { transform: rotateX(70deg) rotateY(60deg); }
-        .ring-3 { transform: rotateX(70deg) rotateY(120deg); }
+        /* Vertical Rings (Longitudinal) */
+        .ring-v-1 { transform: rotateY(0deg); }
+        .ring-v-2 { transform: rotateY(60deg); }
+        .ring-v-3 { transform: rotateY(120deg); }
+
+        /* Horizontal Rings (Latitudinal) */
+        .ring-h-1 { transform: rotateX(90deg) scale(0.85); border-width: 1.5px; opacity: 0.6; }
+        .ring-h-2 { transform: rotateX(90deg) translateY(60px) scale(0.6); opacity: 0.4; }
+        .ring-h-2::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(0, 246, 255, 0.2); border-radius: 50%; transform: translateY(-120px) scale(1); }
+
+        .mesh-orbit {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            border: 1px dashed rgba(0, 246, 255, 0.3);
+            border-radius: 50%;
+            animation: rotateOrbit 15s linear infinite;
+        }
+
+        .orbit-2 {
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            border: 1px solid rgba(0, 246, 255, 0.1);
+            animation: rotateOrbit 25s linear infinite reverse;
+        }
 
         .mesh-sphere {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             background: radial-gradient(circle at 30% 30%, var(--bw-accent), transparent 70%);
             border-radius: 50%;
-            opacity: 0.15;
-            filter: blur(5px);
-            box-shadow: 0 0 50px var(--bw-accent);
+            opacity: 0.2;
+            filter: blur(8px);
+            box-shadow: 0 0 60px rgba(0, 246, 255, 0.4);
         }
 
         .mesh-glow {
@@ -158,38 +193,58 @@ export default function Hero() {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
             background: radial-gradient(circle, rgba(0, 246, 255, 0.1) 0%, transparent 70%);
-            filter: blur(40px);
+            filter: blur(60px);
             z-index: -1;
+        }
+
+        @keyframes rotateGlobe {
+            0% { transform: rotateX(-15deg) rotateY(0deg); }
+            100% { transform: rotateX(-15deg) rotateY(360deg); }
+        }
+
+        @keyframes rotateOrbit {
+            0% { transform: rotateZ(0deg) rotateX(65deg); }
+            100% { transform: rotateZ(360deg) rotateX(65deg); }
         }
 
         @media (max-width: 1024px) {
             .hero-layout {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 40px;
+                gap: 20px;
             }
 
             .hero-visual-anchor {
                 order: 1 !important;
-                margin-bottom: 20px;
-            }
-
-            .hero-content-stack {
-                order: 2 !important;
-                align-items: center !important;
+                height: 280px !important;
+                margin-bottom: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .mesh-container {
-                width: 320px;
-                height: 320px;
+                width: 240px !important;
+                height: 240px !important;
+                aspect-ratio: 1 / 1;
             }
 
             .mesh-3d {
-                width: 220px;
-                height: 220px;
+                width: 160px !important;
+                height: 160px !important;
+            }
+
+            .mesh-sphere {
+                width: 80px;
+                height: 80px;
+            }
+
+            .mesh-glow {
+                width: 300px;
+                height: 300px;
             }
         }
        `}</style>

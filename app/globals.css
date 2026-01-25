@@ -60,6 +60,13 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 1024px) {
+  .bw-root {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
 .bg-atmosphere {
   position: fixed;
   top: 0;
@@ -88,6 +95,15 @@ body {
   opacity: 0.55;
 }
 
+@media (max-width: 768px) {
+  .blob-hero-top {
+    width: 150vw;
+    height: 150vw;
+    top: -50vw;
+    opacity: 0.35;
+  }
+}
+
 .blob-mid-right {
   width: 65vw;
   height: 65vw;
@@ -104,6 +120,21 @@ body {
   bottom: -20vh;
   left: -20vw;
   opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+  .blob-mid-right {
+    width: 120vw;
+    height: 120vw;
+    right: -50vw;
+    top: 50vh;
+  }
+
+  .blob-bottom-left {
+    width: 120vw;
+    height: 120vw;
+    left: -50vw;
+  }
 }
 
 /* Space Glow Animations */

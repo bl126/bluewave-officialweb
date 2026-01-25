@@ -24,7 +24,9 @@ export default function Hero() {
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
 
           <div className="hero-visual-anchor">
-            <Globe className="main-hero-globe" size={480} />
+            <div className="globe-responsive-wrapper">
+              <Globe className="main-hero-globe" size={480} />
+            </div>
           </div>
 
           <div className="hero-content-stack" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -115,6 +117,14 @@ export default function Hero() {
             position: relative;
         }
 
+        .globe-responsive-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (max-width: 1024px) {
             .hero-layout {
                 grid-template-columns: 1fr;
@@ -124,9 +134,13 @@ export default function Hero() {
 
             .hero-visual-anchor {
                 order: 1 !important;
-                height: 320px !important;
-                margin-top: -20px;
-                margin-bottom: 0;
+                height: 240px !important;
+                margin-top: -10px;
+                margin-bottom: 20px;
+            }
+
+            .globe-responsive-wrapper {
+                transform: scale(0.65);
             }
 
             .hero-content-stack {

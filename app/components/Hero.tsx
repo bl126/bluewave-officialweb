@@ -20,25 +20,13 @@ export default function Hero() {
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
 
           <div className="hero-visual-anchor">
-            <div className="human-network-container">
-              <div className="network-nodes">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className={`human-node node-${i}`}>
-                    <svg viewBox="0 0 100 100" className="human-silhouette">
-                      <path d="M50 10C35 10 25 20 25 35C25 50 35 60 50 60C65 60 75 50 75 35C75 20 65 10 50 10ZM20 85C20 70 30 65 50 65C70 65 80 70 80 85V95H20V85Z" fill="currentColor" />
-                    </svg>
-                    <div className="head-glow"></div>
-                  </div>
-                ))}
-                <svg className="connecting-lines" width="100%" height="100%">
-                  <line x1="20%" y1="30%" x2="50%" y2="15%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
-                  <line x1="50%" y1="15%" x2="80%" y2="30%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
-                  <line x1="80%" y1="30%" x2="70%" y2="70%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
-                  <line x1="70%" y1="70%" x2="30%" y2="70%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
-                  <line x1="30%" y1="70%" x2="20%" y2="30%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
-                  <line x1="50%" y1="15%" x2="50%" y2="50%" stroke="rgba(0, 246, 255, 0.4)" strokeWidth="1" />
-                </svg>
-                <div className="central-glow"></div>
+            <div className="mesh-container">
+              <div className="mesh-3d">
+                <div className="mesh-ring ring-1"></div>
+                <div className="mesh-ring ring-2"></div>
+                <div className="mesh-ring ring-3"></div>
+                <div className="mesh-sphere"></div>
+                <div className="mesh-glow"></div>
               </div>
             </div>
           </div>
@@ -118,85 +106,63 @@ export default function Hero() {
             position: relative;
         }
 
-        .human-network-container {
-            width: 450px;
-            height: 450px;
+        .mesh-container {
+            width: 500px;
+            height: 500px;
             position: relative;
+            perspective: 1000px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .network-nodes {
-            width: 100%;
-            height: 100%;
+        .mesh-3d {
+            width: 320px;
+            height: 320px;
             position: relative;
-            animation: floatNetwork 10s ease-in-out infinite;
+            transform-style: preserve-3d;
+            animation: rotateMesh 20s linear infinite, floatMesh 6s ease-in-out infinite;
         }
 
-        .human-node {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            color: rgba(0, 246, 255, 0.15);
-            transition: all 0.5s ease;
-            filter: drop-shadow(0 0 10px rgba(0, 246, 255, 0.1));
-        }
-
-        .human-node:hover {
-            color: rgba(0, 246, 255, 0.4);
-            filter: drop-shadow(0 0 20px rgba(0, 246, 255, 0.3));
-            transform: scale(1.1);
-        }
-
-        .node-1 { top: 15%; left: 45%; animation: pulseNode 4s infinite 0s; }
-        .node-2 { top: 30%; left: 15%; animation: pulseNode 4s infinite 1s; }
-        .node-3 { top: 30%; left: 75%; animation: pulseNode 4s infinite 2s; }
-        .node-4 { top: 70%; left: 25%; animation: pulseNode 4s infinite 1.5s; }
-        .node-5 { top: 70%; left: 65%; animation: pulseNode 4s infinite 0.5s; }
-
-        .head-glow {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
-            background: var(--bw-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--bw-accent), 0 0 30px var(--bw-accent);
-        }
-
-        .connecting-lines {
+        .mesh-ring {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            border: 1px solid rgba(0, 246, 255, 0.15);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.05);
         }
 
-        .central-glow {
+        .ring-1 { transform: rotateX(70deg) rotateY(0deg); }
+        .ring-2 { transform: rotateX(70deg) rotateY(60deg); }
+        .ring-3 { transform: rotateX(70deg) rotateY(120deg); }
+
+        .mesh-sphere {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(0, 246, 255, 0.15) 0%, transparent 70%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, var(--bw-accent), transparent 70%);
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(5px);
+            box-shadow: 0 0 50px var(--bw-accent);
+        }
+
+        .mesh-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 246, 255, 0.1) 0%, transparent 70%);
             filter: blur(40px);
-            z-index: -2;
-        }
-
-        @keyframes floatNetwork {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        @keyframes pulseNode {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; filter: drop-shadow(0 0 25px rgba(0, 246, 255, 0.4)); }
+            z-index: -1;
         }
 
         @media (max-width: 1024px) {
@@ -208,7 +174,7 @@ export default function Hero() {
 
             .hero-visual-anchor {
                 order: 1 !important;
-                margin-bottom: 0;
+                margin-bottom: 20px;
             }
 
             .hero-content-stack {
@@ -216,14 +182,14 @@ export default function Hero() {
                 align-items: center !important;
             }
 
-            .human-network-container {
+            .mesh-container {
                 width: 320px;
                 height: 320px;
             }
 
-            .human-node {
-                width: 45px;
-                height: 60px;
+            .mesh-3d {
+                width: 220px;
+                height: 220px;
             }
         }
        `}</style>

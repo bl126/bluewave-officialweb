@@ -22,12 +22,14 @@ export default function BuildersFormOverlay({ isOpen, onClose }: BuildersFormOve
         activityLevel: "",
         additionalInfo: ""
     });
+    const [error, setError] = useState<string | null>(null);
 
     if (!isOpen) return null;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError(null);
 
         try {
             const response = await fetch("/api/send-telegram", {
@@ -38,14 +40,16 @@ export default function BuildersFormOverlay({ isOpen, onClose }: BuildersFormOve
                 body: JSON.stringify(formData),
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error("Failed to send application");
+                throw new Error(data.error || "Failed to send application. Please try again.");
             }
 
             setIsSuccess(true);
-        } catch (error) {
-            console.error("Submission error:", error);
-            alert("Something went wrong. Please try again later.");
+        } catch (err: any) {
+            console.error("Submission error:", err);
+            setError(err.message || "Something went wrong. Please check your connection and try again.");
         } finally {
             setIsSubmitting(false);
         }
@@ -260,8 +264,22 @@ export default function BuildersFormOverlay({ isOpen, onClose }: BuildersFormOve
                         ></textarea>
                     </div>
 
+                    {error && (
+                        <div style={{
+                            padding: "16px",
+                            background: "rgba(255, 59, 48, 0.1)",
+                            border: "1px solid rgba(255, 59, 48, 0.2)",
+                            borderRadius: "12px",
+                            color: "#FF3B30",
+                            fontSize: "14px",
+                            textAlign: "center"
+                        }}>
+                            {error}
+                        </div>
+                    )}
+
                     <Button variant="primary" type="submit" style={{ width: "100%", justifyContent: "center", marginTop: "12px" }} disabled={isSubmitting}>
-                        <span>{isSubmitting ? "Submitting..." : "SUBMIT APPLICATION"}</span>
+                        <span>{isSubmitting ? "Submitting..." : error ? "TRY AGAIN" : "SUBMIT APPLICATION"}</span>
                     </Button>
                 </form>
             </div>

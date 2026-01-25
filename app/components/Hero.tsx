@@ -144,6 +144,7 @@ export default function Hero() {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                min-height: 80vh; /* Reduced height for mobile as there is no globe */
             }
 
             .hero-layout {
@@ -156,33 +157,10 @@ export default function Hero() {
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                min-height: 500px;
             }
 
             .hero-visual-anchor {
-                position: absolute !important;
-                top: 50% !important;
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important;
-                width: 100% !important;
-                height: 100% !important;
-                z-index: 0 !important;
-                opacity: 0.25 !important;
-                pointer-events: none !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                margin: 0 !important;
-            }
-
-            .globe-responsive-wrapper {
-                width: 320px !important;
-                height: 320px !important;
-                aspect-ratio: 1 / 1 !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                transform: none !important;
+                display: none !important; /* Remove globe on mobile */
             }
 
             .hero-content-stack {

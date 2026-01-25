@@ -9,12 +9,12 @@ export default function Vision() {
   const cards = [
     {
       title: "The Signal Deficit",
-      desc: "Digital signals are easily faked. Platforms, products & brands struggle to identify real humans and high-value consistency among the noise across web3.",
+      desc: "Real human presence & attention generate enormous value, but own none of it. Recognition is concentrated to few, while most real contributors remain invisible. Brands and products struggle to reach real humans, as attention metrics across Web3 are easily distorted by bots & automation.",
       tag: "The Challenge"
     },
     {
       title: "Verifiable Presence",
-      desc: "Bluewave transforms everyday human behavior into an on-chain asset, turning simple presence into a portable signal of trust and reputation.",
+      desc: "Bluewave introduces the human layer of Web3 on TON blockchain, real humans build verifiable presence score, own it as an on-chain asset, & monetize it through an ethical marketplace. Brands & products gain access to real verified human presence inside an only-human zoned infrastructure built on TON.",
       tag: "The Solution"
     }
   ];
@@ -42,7 +42,7 @@ export default function Vision() {
             verifiable Human Presence
           </h2>
           <p style={{ fontSize: "clamp(18px, 1.5vw, 22px)", color: "var(--bw-text-secondary)", lineHeight: 1.6 }}>
-            In a decentralized future, "Presence" is the ultimate metric. We provide the infrastructure for users to build, own, and monetize their presence across the entire web3 ecosystem.
+            In a decentralized future, "Presence" is the ultimate metric. Bluewave provides the infrastructure for users to build, own, and monetize their presence across the entire web3 ecosystem, Enabling brands & products access to verified human presence in a bot-dominated web3 ecosystem.
           </p>
         </div>
 

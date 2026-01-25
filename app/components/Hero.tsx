@@ -8,7 +8,20 @@ import Badge from "./core/Badge";
 import Globe from "./core/Globe";
 import Starfield from "./core/Starfield";
 
+import { useEffect, useState } from "react";
+
 export default function Hero() {
+  const [globeSize, setGlobeSize] = useState(480);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setGlobeSize(window.innerWidth < 1024 ? 280 : 480);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section id="hero" className="hero-section">
       <Starfield />
@@ -25,7 +38,7 @@ export default function Hero() {
 
           <div className="hero-visual-anchor">
             <div className="globe-responsive-wrapper">
-              <Globe className="main-hero-globe" size={480} />
+              <Globe className="main-hero-globe" size={globeSize} />
             </div>
           </div>
 
@@ -134,13 +147,23 @@ export default function Hero() {
 
             .hero-visual-anchor {
                 order: 1 !important;
-                height: 240px !important;
+                height: 280px !important;
+                width: 100% !important;
                 margin-top: -10px;
                 margin-bottom: 20px;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
             }
 
             .globe-responsive-wrapper {
-                transform: scale(0.65);
+                width: 280px !important;
+                height: 280px !important;
+                aspect-ratio: 1 / 1 !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                transform: none !important;
             }
 
             .hero-content-stack {

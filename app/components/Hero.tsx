@@ -15,7 +15,7 @@ export default function Hero() {
 
   useEffect(() => {
     const handleResize = () => {
-      setGlobeSize(window.innerWidth < 1024 ? 280 : 480);
+      setGlobeSize(window.innerWidth < 1024 ? 320 : 480);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -139,26 +139,45 @@ export default function Hero() {
         }
 
         @media (max-width: 1024px) {
+            .hero-section {
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             .hero-layout {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 20px;
+                gap: 0;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 500px;
             }
 
             .hero-visual-anchor {
-                order: 1 !important;
-                height: 280px !important;
+                position: absolute !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
                 width: 100% !important;
-                margin-top: -10px;
-                margin-bottom: 20px;
+                height: 100% !important;
+                z-index: 0 !important;
+                opacity: 0.25 !important;
+                pointer-events: none !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
+                margin: 0 !important;
             }
 
             .globe-responsive-wrapper {
-                width: 280px !important;
-                height: 280px !important;
+                width: 320px !important;
+                height: 320px !important;
                 aspect-ratio: 1 / 1 !important;
                 display: flex !important;
                 justify-content: center !important;
@@ -167,8 +186,11 @@ export default function Hero() {
             }
 
             .hero-content-stack {
-                order: 2 !important;
+                position: relative !important;
+                z-index: 10 !important;
                 align-items: center !important;
+                width: 100%;
+                padding: 0 20px;
             }
         }
        `}</style>

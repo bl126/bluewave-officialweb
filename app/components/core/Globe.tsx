@@ -84,27 +84,27 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
 
-            rotationRef.current += 0.3; // Slower, smoother rotation
+            rotationRef.current += 0.3; // Smoother rotation
 
-            // Draw Background Atmosphere
-            const glow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, canvas.width / 2);
-            glow.addColorStop(0, "rgba(0, 246, 255, 0.08)");
-            glow.addColorStop(0.8, "rgba(0, 246, 255, 0.03)");
-            glow.addColorStop(1, "transparent");
-            ctx.fillStyle = glow;
+            // 1. Draw Background Atmosphere Glow (Brighter)
+            const bgGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, canvas.width / 2);
+            bgGlow.addColorStop(0, "rgba(0, 246, 255, 0.15)");
+            bgGlow.addColorStop(0.6, "rgba(0, 246, 255, 0.04)");
+            bgGlow.addColorStop(1, "transparent");
+            ctx.fillStyle = bgGlow;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Sphere Surface
+            // 2. Sphere Surface (Transparent glass feel)
             ctx.beginPath();
             ctx.arc(centerX, centerY, (canvas.width / 2) * 0.85, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(4, 7, 10, 0.7)";
+            ctx.fillStyle = "rgba(4, 7, 10, 0.45)";
             ctx.fill();
-            ctx.strokeStyle = "rgba(0, 246, 255, 0.1)";
+            ctx.strokeStyle = "rgba(0, 246, 255, 0.05)";
             ctx.stroke();
 
-            // Render Borders (Optimized Loop)
-            ctx.strokeStyle = "rgba(0, 246, 255, 0.35)";
-            ctx.lineWidth = 1;
+            // 3. Render Borders (Transparent & Thin)
+            ctx.strokeStyle = "rgba(0, 246, 255, 0.12)";
+            ctx.lineWidth = 0.8;
 
             rings.forEach(ring => {
                 let drawing = false;
@@ -132,18 +132,50 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
                 if (drawing) ctx.stroke();
             });
 
-            // Render Active Country Dots
+            // 4. Draw Connecting Arcs (Human Network Feeling)
+            ctx.strokeStyle = "rgba(0, 246, 255, 0.08)";
+            ctx.lineWidth = 0.4;
+            for (let i = 0; i < ACTIVE_COUNTRIES.length; i++) {
+                // Connect each dot to a few others to create a global mesh feel
+                for (let j = i + 1; j < ACTIVE_COUNTRIES.length; j += 4) {
+                    const p1 = project(ACTIVE_COUNTRIES[i].lat, ACTIVE_COUNTRIES[i].lon, rotationRef.current);
+                    const p2 = project(ACTIVE_COUNTRIES[j].lat, ACTIVE_COUNTRIES[j].lon, rotationRef.current);
+
+                    if (p1.z > 0 && p2.z > 0) {
+                        ctx.beginPath();
+                        ctx.moveTo(centerX + p1.x, centerY + p1.y);
+                        // Subtle arc
+                        const midX = (p1.x + p2.x) / 2;
+                        const midY = (p1.y + p2.y) / 2;
+                        ctx.quadraticCurveTo(centerX + midX * 1.15, centerY + midY * 1.15, centerX + p2.x, centerY + p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // 5. Render Active Country Dots (Brighter & Pulsating)
+            const pulse = 1 + Math.sin(Date.now() / 400) * 0.25;
             ACTIVE_COUNTRIES.forEach(country => {
                 const pos = project(country.lat, country.lon, rotationRef.current);
-                if (pos.z > 10) { // Slight buffer to prevent dots exactly on edge from flickering
+                if (pos.z > 10) { // Slight buffer
+                    // Shimmer/Shine
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = "#00F6FF";
+
                     ctx.beginPath();
                     ctx.arc(centerX + pos.x, centerY + pos.y, 4, 0, Math.PI * 2);
                     ctx.fillStyle = "#00F6FF";
                     ctx.fill();
 
+                    ctx.shadowBlur = 0; // Reset
+
+                    // Pulsating Aura
                     ctx.beginPath();
-                    ctx.arc(centerX + pos.x, centerY + pos.y, 10, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(0, 246, 255, 0.25)";
+                    ctx.arc(centerX + pos.x, centerY + pos.y, 12 * pulse, 0, Math.PI * 2);
+                    const dotGlow = ctx.createRadialGradient(centerX + pos.x, centerY + pos.y, 0, centerX + pos.x, centerY + pos.y, 12 * pulse);
+                    dotGlow.addColorStop(0, "rgba(0, 246, 255, 0.4)");
+                    dotGlow.addColorStop(1, "transparent");
+                    ctx.fillStyle = dotGlow;
                     ctx.fill();
                 }
             });

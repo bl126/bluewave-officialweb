@@ -6,10 +6,13 @@ import Container from "./core/Container";
 import Button from "./core/Button";
 import Badge from "./core/Badge";
 import Globe from "./core/Globe";
+import Starfield from "./core/Starfield";
 
 export default function Hero() {
   return (
     <section id="hero" className="hero-section">
+      <Starfield />
+      <div className="hero-space-overlay"></div>
       {/* Dynamic Visual Atmosphere */}
       <div className="bg-atmosphere">
         <div className="ambient-blob blob-hero-top"></div>
@@ -80,6 +83,19 @@ export default function Hero() {
         </div>
       </Container>
       <style jsx>{`
+        .hero-section {
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, #04070a 0%, transparent 100%);
+        }
+
+        .hero-space-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(4, 7, 10, 0.4) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .hero-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;

@@ -20,19 +20,31 @@ export default function Hero() {
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
 
           <div className="hero-visual-anchor">
-            <div className="globe-container">
-              <div className="globe">
-                <div className="ring ring-1"></div>
-                <div className="ring ring-2"></div>
-                <div className="ring ring-3"></div>
-                <div className="ring ring-4"></div>
-                <div className="core-glow"></div>
+            <div className="human-network-container">
+              <div className="network-nodes">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className={`human-node node-${i}`}>
+                    <svg viewBox="0 0 100 100" className="human-silhouette">
+                      <path d="M50 10C35 10 25 20 25 35C25 50 35 60 50 60C65 60 75 50 75 35C75 20 65 10 50 10ZM20 85C20 70 30 65 50 65C70 65 80 70 80 85V95H20V85Z" fill="currentColor" />
+                    </svg>
+                    <div className="head-glow"></div>
+                  </div>
+                ))}
+                <svg className="connecting-lines" width="100%" height="100%">
+                  <line x1="20%" y1="30%" x2="50%" y2="15%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
+                  <line x1="50%" y1="15%" x2="80%" y2="30%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
+                  <line x1="80%" y1="30%" x2="70%" y2="70%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
+                  <line x1="70%" y1="70%" x2="30%" y2="70%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
+                  <line x1="30%" y1="70%" x2="20%" y2="30%" stroke="rgba(0, 246, 255, 0.2)" strokeWidth="1" />
+                  <line x1="50%" y1="15%" x2="50%" y2="50%" stroke="rgba(0, 246, 255, 0.4)" strokeWidth="1" />
+                </svg>
+                <div className="central-glow"></div>
               </div>
             </div>
           </div>
 
           <div className="hero-content-stack" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-
+            {/* Same content stack as before */}
             <h1 className="hero-main-title" style={{ marginTop: "0", marginBottom: "40px" }}>
               The Human <br />
               Presence Layer <br />
@@ -103,76 +115,116 @@ export default function Hero() {
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
-        /* 3D GLOBE ENGINE */
-        .globe-container {
-            width: 400px;
-            height: 400px;
-            perspective: 1200px;
-            animation: floatMesh 7s ease-in-out infinite;
+        .human-network-container {
+            width: 450px;
+            height: 450px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .globe {
+        .network-nodes {
             width: 100%;
             height: 100%;
             position: relative;
-            transform-style: preserve-3d;
-            animation: rotateMesh 25s linear infinite;
+            animation: floatNetwork 10s ease-in-out infinite;
         }
 
-        .ring {
+        .human-node {
             position: absolute;
-            top: 50%;
+            width: 60px;
+            height: 80px;
+            color: rgba(0, 246, 255, 0.15);
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 246, 255, 0.1));
+        }
+
+        .human-node:hover {
+            color: rgba(0, 246, 255, 0.4);
+            filter: drop-shadow(0 0 20px rgba(0, 246, 255, 0.3));
+            transform: scale(1.1);
+        }
+
+        .node-1 { top: 15%; left: 45%; animation: pulseNode 4s infinite 0s; }
+        .node-2 { top: 30%; left: 15%; animation: pulseNode 4s infinite 1s; }
+        .node-3 { top: 30%; left: 75%; animation: pulseNode 4s infinite 2s; }
+        .node-4 { top: 70%; left: 25%; animation: pulseNode 4s infinite 1.5s; }
+        .node-5 { top: 70%; left: 65%; animation: pulseNode 4s infinite 0.5s; }
+
+        .head-glow {
+            position: absolute;
+            top: 15px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            border: 2px solid rgba(0, 246, 255, 0.5); /* Cyan */
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--bw-accent);
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 246, 255, 0.2);
+            box-shadow: 0 0 15px var(--bw-accent), 0 0 30px var(--bw-accent);
         }
 
-        .ring-1 { width: 380px; height: 380px; transform: translate(-50%, -50%) rotateY(0deg); }
-        .ring-2 { width: 360px; height: 360px; transform: translate(-50%, -50%) rotateY(60deg); border-color: rgba(0, 136, 255, 0.4); } /* Blue-ish */
-        .ring-3 { width: 360px; height: 360px; transform: translate(-50%, -50%) rotateY(-60deg); border-color: rgba(0, 246, 255, 0.4); }
-        .ring-4 { width: 400px; height: 400px; transform: translate(-50%, -50%) rotateX(90deg); border: 1px dashed rgba(255, 255, 255, 0.2); } /* Equator */
+        .connecting-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-        .core-glow {
+        .central-glow {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(0,246,255,0.4) 0%, transparent 70%);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(0, 246, 255, 0.15) 0%, transparent 70%);
             filter: blur(40px);
+            z-index: -2;
+        }
+
+        @keyframes floatNetwork {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes pulseNode {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; filter: drop-shadow(0 0 25px rgba(0, 246, 255, 0.4)); }
         }
 
         @media (max-width: 1024px) {
             .hero-layout {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 60px;
+                gap: 40px;
             }
 
             .hero-visual-anchor {
-                order: 1 !important; /* Mobile: Globe FIRST */
-                margin-bottom: 20px;
+                order: 1 !important;
+                margin-bottom: 0;
             }
 
             .hero-content-stack {
-                order: 2 !important; /* Mobile: Text SECOND */
+                order: 2 !important;
                 align-items: center !important;
             }
 
-            .globe-container {
-                width: 280px;
-                height: 280px;
+            .human-network-container {
+                width: 320px;
+                height: 320px;
             }
 
-            .ring-1 { width: 260px; height: 260px; }
-            .ring-2 { width: 240px; height: 240px; }
-            .ring-3 { width: 240px; height: 240px; }
-            .ring-4 { width: 280px; height: 280px; }
+            .human-node {
+                width: 45px;
+                height: 60px;
+            }
         }
        `}</style>
     </section>

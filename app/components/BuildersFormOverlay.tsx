@@ -29,11 +29,26 @@ export default function BuildersFormOverlay({ isOpen, onClose }: BuildersFormOve
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulating API call (can be replaced with Formspree/EmailJS later)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch("/api/send-telegram", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        setIsSubmitting(false);
-        setIsSuccess(true);
+            if (!response.ok) {
+                throw new Error("Failed to send application");
+            }
+
+            setIsSuccess(true);
+        } catch (error) {
+            console.error("Submission error:", error);
+            alert("Something went wrong. Please try again later.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSuccess) {

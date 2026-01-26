@@ -13,19 +13,6 @@ export default function Stats() {
 
     return (
         <section id="stats" className="section-padding" style={{ position: "relative" }}>
-            {/* Dynamic Dashboard Glow */}
-            <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "75vw",
-                height: "350px",
-                background: "rgba(0, 246, 255, 0.05)",
-                filter: "blur(200px)",
-                opacity: 0.12,
-                zIndex: -1
-            }}></div>
 
             <Container>
                 <div style={{ textAlign: "center", marginBottom: "80px" }}>

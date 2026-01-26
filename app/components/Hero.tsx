@@ -24,9 +24,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="hero-section">
-      <Starfield />
-      <div className="hero-space-overlay"></div>
-
       <Container style={{ height: "100%", display: "flex", alignItems: "center" }}>
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
 

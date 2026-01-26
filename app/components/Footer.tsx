@@ -6,26 +6,19 @@ import Image from "next/image";
 
 export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" | "privacy") => void }) {
     return (
-        <footer className="footer section-padding" style={{ position: "relative", borderTop: "1px solid var(--bw-glass-border)" }}>
+        <footer className="footer" style={{
+            position: "relative",
+            borderTop: "1px solid var(--bw-glass-border)",
+            padding: "80px 0 60px"
+        }}>
             {/* ... atmospheric elements ... */}
-            <div style={{
-                position: "absolute",
-                bottom: "-15vh",
-                right: "-15vw",
-                width: "600px",
-                height: "600px",
-                background: "rgba(0, 246, 255, 0.06)",
-                filter: "blur(220px)",
-                opacity: 0.12,
-                zIndex: -1
-            }}></div>
 
             <Container>
                 <div className="footer-layout" style={{
                     display: "grid",
                     gridTemplateColumns: "1.3fr 2fr",
                     gap: "120px",
-                    marginBottom: "120px"
+                    marginBottom: "80px"
                 }}>
 
                     <div className="footer-brand-column">
@@ -79,7 +72,7 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
                 </div>
 
                 <div className="footer-bottom-tier" style={{
-                    paddingTop: "56px",
+                    paddingTop: "40px",
                     borderTop: "1px solid rgba(255,255,255,0.06)",
                     display: "flex",
                     justifyContent: "space-between",

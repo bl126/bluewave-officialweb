@@ -24,19 +24,6 @@ export default function HowItWorks() {
 
     return (
         <section id="how-it-works" className="section-padding" style={{ position: "relative", background: "linear-gradient(to bottom, transparent, rgba(0, 246, 255, 0.04), transparent)" }}>
-            {/* Central Technical Light Pool */}
-            <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "60vw",
-                height: "450px",
-                background: "rgba(0, 246, 255, 0.06)",
-                filter: "blur(180px)",
-                opacity: 0.15,
-                zIndex: -1
-            }}></div>
 
             <Container>
                 <div style={{ textAlign: "center", marginBottom: "80px" }}>

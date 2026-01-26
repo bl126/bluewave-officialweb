@@ -13,19 +13,6 @@ export default function Marketplace() {
 
     return (
         <section id="marketplace" className="section-padding" style={{ position: "relative", overflow: "hidden" }}>
-            {/* Background Soft Atmospheric Glow */}
-            <div style={{
-                position: "absolute",
-                top: "30%",
-                right: "-20vw",
-                width: "700px",
-                height: "700px",
-                background: "rgba(0, 246, 255, 0.05)",
-                filter: "blur(220px)",
-                opacity: 0.16,
-                zIndex: -1
-            }}></div>
-
             <Container>
                 <div className="marketplace-layout" style={{
                     display: "grid",

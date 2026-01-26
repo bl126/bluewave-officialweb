@@ -15,7 +15,7 @@ export default function Hero() {
 
   useEffect(() => {
     const handleResize = () => {
-      setGlobeSize(window.innerWidth < 1024 ? 320 : 480);
+      setGlobeSize(window.innerWidth < 768 ? 320 : 480);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -26,12 +26,6 @@ export default function Hero() {
     <section id="hero" className="hero-section">
       <Starfield />
       <div className="hero-space-overlay"></div>
-      {/* Dynamic Visual Atmosphere */}
-      <div className="bg-atmosphere" style={{ pointerEvents: "none", zIndex: -1 }}>
-        <div className="ambient-blob blob-hero-top"></div>
-        <div className="ambient-blob blob-mid-right"></div>
-        <div className="ambient-blob blob-bottom-left"></div>
-      </div>
 
       <Container style={{ height: "100%", display: "flex", alignItems: "center" }}>
         <div className="hero-layout" style={{ height: "auto", maxHeight: "100%", width: "100%" }}>
@@ -138,7 +132,7 @@ export default function Hero() {
             height: 100%;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .hero-section {
                 overflow: hidden;
                 display: flex;

@@ -21,7 +21,13 @@ export default function Home() {
   });
 
   return (
-    <main style={{ background: "var(--bw-bg)", minHeight: "100vh", overflow: "hidden" }}>
+    <main className="bw-root" style={{ minHeight: "100vh" }}>
+      <div className="bg-atmosphere">
+        <div className="ambient-blob blob-hero-top"></div>
+        <div className="ambient-blob blob-mid-right"></div>
+        <div className="ambient-blob blob-bottom-left"></div>
+      </div>
+
       <Header />
 
       <Hero />

@@ -21,19 +21,6 @@ export default function Vision() {
 
   return (
     <section id="vision" className="section-padding" style={{ position: "relative" }}>
-      {/* Strategic Background Light */}
-      <div style={{
-        position: "absolute",
-        top: "40%",
-        right: "-10vw",
-        width: "600px",
-        height: "600px",
-        background: "rgba(0, 246, 255, 0.05)",
-        filter: "blur(200px)",
-        opacity: 0.12,
-        zIndex: -1
-      }}></div>
-
       <Container>
         <div className="vision-header" style={{ marginBottom: "120px", maxWidth: "720px" }}>
           <Badge variant="primary">The Vision</Badge>

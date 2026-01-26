@@ -40,7 +40,7 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
 
     useEffect(() => {
         if (!mounted) return;
-        const isMobile = window.innerWidth < 1024;
+        const isMobile = window.innerWidth < 768;
         if (isMobile) return;
 
         // Fetch GeoJSON borders
@@ -198,7 +198,7 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
     }, [rings, mounted]);
 
     if (!mounted) return null;
-    if (typeof window !== "undefined" && window.innerWidth < 1024) return null;
+    if (typeof window !== "undefined" && window.innerWidth < 768) return null;
 
     return (
         <div className={`globe-wrapper ${className}`} style={{ width: size, height: size, position: "relative" }}>

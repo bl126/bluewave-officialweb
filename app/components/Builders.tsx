@@ -10,20 +10,6 @@ export default function Builders({ onApply }: { onApply?: () => void }) {
 
     return (
         <section id="builders" className="section-padding" style={{ position: "relative" }}>
-            {/* ... atmospheric elements ... */}
-            <div style={{
-                position: "absolute",
-                bottom: "-15vh",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "85vw",
-                height: "350px",
-                background: "rgba(0, 246, 255, 0.04)",
-                filter: "blur(200px)",
-                opacity: 0.18,
-                zIndex: -1
-            }}></div>
-
             <Container>
                 <div className="builders-header" style={{ marginBottom: "120px", maxWidth: "640px" }}>
                     <Badge variant="primary">Builders</Badge>

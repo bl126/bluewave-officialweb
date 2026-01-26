@@ -112,19 +112,6 @@ export default function FAQ() {
 
     return (
         <section id="faq" className="section-padding" style={{ position: "relative" }}>
-            {/* Atmosphere Anchor */}
-            <div style={{
-                position: "absolute",
-                top: "20%",
-                right: "-10vw",
-                width: "50vw",
-                height: "50vw",
-                background: "rgba(0, 246, 255, 0.03)",
-                filter: "blur(180px)",
-                opacity: 0.1,
-                zIndex: -1
-            }}></div>
-
             <Container>
                 <div style={{
                     display: "grid",

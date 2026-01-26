@@ -1,11 +1,22 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Starfield() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
+        // Remove on mobile to save performance
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) return;
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -59,9 +70,7 @@ export default function Starfield() {
 
         const init = () => {
             stars = [];
-            const isMobile = window.innerWidth < 768;
-            const density = isMobile ? 20000 : 10000;
-            const starCount = Math.floor((window.innerWidth * window.innerHeight) / density);
+            const starCount = Math.floor((window.innerWidth * window.innerHeight) / 10000);
             for (let i = 0; i < starCount; i++) {
                 stars.push(new Star());
             }
@@ -76,10 +85,12 @@ export default function Starfield() {
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        window.addEventListener("resize", () => {
+        const handleResize = () => {
             resizeCanvas();
             init();
-        });
+        };
+
+        window.addEventListener("resize", handleResize);
 
         resizeCanvas();
         init();
@@ -87,9 +98,16 @@ export default function Starfield() {
 
         return () => {
             cancelAnimationFrame(animationFrameId);
-            window.removeEventListener("resize", resizeCanvas);
+            window.removeEventListener("resize", handleResize);
         };
-    }, []);
+    }, [mounted]);
+
+    if (!mounted) return null;
+
+    // Mobile check for rendering
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+        return null;
+    }
 
     return (
         <canvas

@@ -32,7 +32,17 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
     const [rings, setRings] = useState<number[][][]>([]);
     const rotationRef = useRef(0);
 
+    const [mounted, setMounted] = useState(false);
+
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+        const isMobile = window.innerWidth < 1024;
+        if (isMobile) return;
+
         // Fetch GeoJSON borders
         fetch("/data/countries.geojson")
             .then(res => res.json())
@@ -185,7 +195,10 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
 
         render();
         return () => cancelAnimationFrame(animationId);
-    }, [rings]);
+    }, [rings, mounted]);
+
+    if (!mounted) return null;
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return null;
 
     return (
         <div className={`globe-wrapper ${className}`} style={{ width: size, height: size, position: "relative" }}>

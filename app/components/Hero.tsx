@@ -27,7 +27,7 @@ export default function Hero() {
       <Starfield />
       <div className="hero-space-overlay"></div>
       {/* Dynamic Visual Atmosphere */}
-      <div className="bg-atmosphere">
+      <div className="bg-atmosphere" style={{ pointerEvents: "none", zIndex: -1 }}>
         <div className="ambient-blob blob-hero-top"></div>
         <div className="ambient-blob blob-mid-right"></div>
         <div className="ambient-blob blob-bottom-left"></div>

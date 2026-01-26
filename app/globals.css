@@ -62,7 +62,7 @@ body {
 
 @media (max-width: 1024px) {
   .bw-root {
-    background-attachment: scroll;
+    background-attachment: scroll !important;
     background-size: cover;
   }
 }
@@ -84,6 +84,7 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
   will-change: transform, opacity;
+  z-index: -1;
 }
 
 .blob-hero-top {
@@ -214,6 +215,11 @@ section {
   }
 }
 
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}
+
 .hero-layout {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -233,12 +239,28 @@ section {
   box-shadow: 0 50px 120px rgba(0, 0, 0, 0.35);
 }
 
+@media (max-width: 768px) {
+  .glass-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
 .glass-card {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.01) 100%);
   border: 1px solid var(--bw-glass-border);
   border-radius: 14px;
   padding: 56px;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.04);
+  }
 }
 
 .glass-card:hover {

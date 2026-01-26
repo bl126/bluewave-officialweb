@@ -21,7 +21,7 @@ export default function Home() {
   });
 
   return (
-    <main className="bw-root" style={{ minHeight: "100vh" }}>
+    <main className="bw-root">
       <div className="bg-atmosphere">
         <div className="ambient-blob blob-hero-top"></div>
         <div className="ambient-blob blob-mid-right"></div>

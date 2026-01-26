@@ -31,7 +31,6 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [rings, setRings] = useState<number[][][]>([]);
     const rotationRef = useRef(0);
-
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -40,18 +39,21 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
 
     useEffect(() => {
         if (!mounted) return;
-        const isMobile = window.innerWidth < 768;
-        if (isMobile) return;
 
-        // Fetch GeoJSON borders
+        // Skip on mobile for performance
+        if (typeof window !== "undefined" && window.innerWidth < 768) return;
+
         fetch("/data/countries.geojson")
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error("Fetch failed");
+                return res.json();
+            })
             .then(data => {
+                if (!data || !data.features) return;
                 const flattenedRings: number[][][] = [];
                 data.features.forEach((feature: any) => {
                     const { geometry } = feature;
                     if (!geometry) return;
-
                     const coords = geometry.coordinates;
                     if (geometry.type === "Polygon") {
                         coords.forEach((ring: any) => flattenedRings.push(ring));
@@ -61,12 +63,14 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
                         });
                     }
                 });
-                // Optional: Decimate to improve performance if file is too dense
-                // For now, use all points but simplified structure
                 setRings(flattenedRings);
             })
-            .catch(err => console.error("Error loading globe data:", err));
-    }, []);
+            .catch(err => {
+                console.error("Globe data error:", err);
+                // Fallback to avoid empty state blocking logic
+                setRings([[[0, 0]]]);
+            });
+    }, [mounted]);
 
     useEffect(() => {
         if (!canvasRef.current || rings.length === 0) return;
@@ -81,11 +85,9 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
             const λ = (lon + rotation) * (Math.PI / 180);
             const φ = lat * (Math.PI / 180);
             const r = (canvas.width / 2) * 0.85;
-
             const x = r * Math.cos(φ) * Math.sin(λ);
             const y = -r * Math.sin(φ);
             const z = r * Math.cos(φ) * Math.cos(λ);
-
             return { x, y, z };
         };
 
@@ -94,9 +96,9 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
 
-            rotationRef.current += 0.3; // Smoother rotation
+            rotationRef.current += 0.3;
 
-            // 1. Draw Background Atmosphere Glow (Brighter)
+            // 1. Atmosphere Glow
             const bgGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, canvas.width / 2);
             bgGlow.addColorStop(0, "rgba(0, 246, 255, 0.15)");
             bgGlow.addColorStop(0.6, "rgba(0, 246, 255, 0.04)");
@@ -104,7 +106,7 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
             ctx.fillStyle = bgGlow;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 2. Sphere Surface (Transparent glass feel)
+            // 2. Sphere
             ctx.beginPath();
             ctx.arc(centerX, centerY, (canvas.width / 2) * 0.85, 0, Math.PI * 2);
             ctx.fillStyle = "rgba(4, 7, 10, 0.45)";
@@ -112,18 +114,15 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
             ctx.strokeStyle = "rgba(0, 246, 255, 0.05)";
             ctx.stroke();
 
-            // 3. Render Borders (Transparent & Thin)
+            // 3. Borders
             ctx.strokeStyle = "rgba(0, 246, 255, 0.12)";
             ctx.lineWidth = 0.8;
-
             rings.forEach(ring => {
                 let drawing = false;
                 ctx.beginPath();
-
                 for (let i = 0; i < ring.length; i++) {
                     const [lon, lat] = ring[i];
                     const pos = project(lat, lon, rotationRef.current);
-
                     if (pos.z > 0) {
                         if (!drawing) {
                             ctx.moveTo(centerX + pos.x, centerY + pos.y);
@@ -131,30 +130,25 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
                         } else {
                             ctx.lineTo(centerX + pos.x, centerY + pos.y);
                         }
-                    } else {
-                        if (drawing) {
-                            ctx.stroke();
-                            ctx.beginPath();
-                            drawing = false;
-                        }
+                    } else if (drawing) {
+                        ctx.stroke();
+                        ctx.beginPath();
+                        drawing = false;
                     }
                 }
                 if (drawing) ctx.stroke();
             });
 
-            // 4. Draw Connecting Arcs (Human Network Feeling)
+            // 4. Arcs
             ctx.strokeStyle = "rgba(0, 246, 255, 0.08)";
             ctx.lineWidth = 0.4;
             for (let i = 0; i < ACTIVE_COUNTRIES.length; i++) {
-                // Connect each dot to a few others to create a global mesh feel
                 for (let j = i + 1; j < ACTIVE_COUNTRIES.length; j += 4) {
                     const p1 = project(ACTIVE_COUNTRIES[i].lat, ACTIVE_COUNTRIES[i].lon, rotationRef.current);
                     const p2 = project(ACTIVE_COUNTRIES[j].lat, ACTIVE_COUNTRIES[j].lon, rotationRef.current);
-
                     if (p1.z > 0 && p2.z > 0) {
                         ctx.beginPath();
                         ctx.moveTo(centerX + p1.x, centerY + p1.y);
-                        // Subtle arc
                         const midX = (p1.x + p2.x) / 2;
                         const midY = (p1.y + p2.y) / 2;
                         ctx.quadraticCurveTo(centerX + midX * 1.15, centerY + midY * 1.15, centerX + p2.x, centerY + p2.y);
@@ -163,23 +157,19 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
                 }
             }
 
-            // 5. Render Active Country Dots (Brighter & Pulsating)
+            // 5. Dots
             const pulse = 1 + Math.sin(Date.now() / 400) * 0.25;
             ACTIVE_COUNTRIES.forEach(country => {
                 const pos = project(country.lat, country.lon, rotationRef.current);
-                if (pos.z > 10) { // Slight buffer
-                    // Shimmer/Shine
+                if (pos.z > 10) {
                     ctx.shadowBlur = 15;
                     ctx.shadowColor = "#00F6FF";
-
                     ctx.beginPath();
                     ctx.arc(centerX + pos.x, centerY + pos.y, 4, 0, Math.PI * 2);
                     ctx.fillStyle = "#00F6FF";
                     ctx.fill();
+                    ctx.shadowBlur = 0;
 
-                    ctx.shadowBlur = 0; // Reset
-
-                    // Pulsating Aura
                     ctx.beginPath();
                     ctx.arc(centerX + pos.x, centerY + pos.y, 12 * pulse, 0, Math.PI * 2);
                     const dotGlow = ctx.createRadialGradient(centerX + pos.x, centerY + pos.y, 0, centerX + pos.x, centerY + pos.y, 12 * pulse);
@@ -201,14 +191,13 @@ export default function Globe({ className = "", size = 600 }: GlobeProps) {
     if (typeof window !== "undefined" && window.innerWidth < 768) return null;
 
     return (
-        <div className={`globe-wrapper ${className}`} style={{ width: size, height: size, position: "relative" }}>
+        <div className={`globe-wrapper ${className}`} style={{ width: size, height: size, position: "relative", zIndex: 5 }}>
             <canvas
                 ref={canvasRef}
-                width={size * 2} // Double for sharp rendering
+                width={size * 2}
                 height={size * 2}
                 style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
             />
-            {/* Overlay a subtle glass shine */}
             <div style={{
                 position: "absolute",
                 top: "15%",

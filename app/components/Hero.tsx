@@ -122,6 +122,9 @@ export default function Hero() {
             justify-content: center;
             align-items: center;
             position: relative;
+            min-height: 500px;
+            width: 100%;
+            z-index: 10;
         }
 
         .globe-responsive-wrapper {
@@ -130,6 +133,7 @@ export default function Hero() {
             align-items: center;
             width: 100%;
             height: 100%;
+            pointer-events: none;
         }
 
         @media (max-width: 768px) {

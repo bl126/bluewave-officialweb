@@ -59,7 +59,9 @@ export default function Starfield() {
 
         const init = () => {
             stars = [];
-            const starCount = Math.floor((window.innerWidth * window.innerHeight) / 10000);
+            const isMobile = window.innerWidth < 768;
+            const density = isMobile ? 20000 : 10000;
+            const starCount = Math.floor((window.innerWidth * window.innerHeight) / density);
             for (let i = 0; i < starCount; i++) {
                 stars.push(new Star());
             }
@@ -101,6 +103,7 @@ export default function Starfield() {
                 pointerEvents: "none",
                 zIndex: -1,
                 opacity: 0.4,
+                willChange: "transform"
             }}
         />
     );

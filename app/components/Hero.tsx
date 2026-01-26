@@ -65,7 +65,7 @@ export default function Hero() {
               lineHeight: 1.6
             }}>
               Build, Own, & Monetize Your Digital Presence. <br />
-              Bluewave turns real human consistency into verifiable user owned on-chain reputation.
+              Bluewave turns real human consistency into verifiable user owned on-chain reputation. <br /> PresenceFi on TON.
             </p>
 
             <div className="hero-cta-group" style={{ display: "flex", gap: "24px" }}>

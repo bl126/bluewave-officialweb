@@ -9,7 +9,7 @@ export default function Vision() {
   const cards = [
     {
       title: "The Signal Deficit",
-      desc: "Real human presence & attention generate enormous value, but own none of it. Recognition is concentrated to few, while most real contributors remain invisible. Brands and products struggle to reach real humans, as attention metrics across Web3 are easily distorted by bots & automation.",
+      desc: "Real human presence & attention generate enormous value, but they own none of it. Recognition is concentrated to few, while most real contributors remain invisible. Brands and products struggle to reach real humans, as attention metrics across Web3 are easily distorted by bots & automation.",
       tag: "The Challenge"
     },
     {

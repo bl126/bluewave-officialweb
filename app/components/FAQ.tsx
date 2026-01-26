@@ -88,15 +88,15 @@ export default function FAQ() {
         },
         {
             question: "Is Bluewave really safe and private?",
-            answer: "Yes — privacy is at the core. We only use your Telegram ID to link your presence ID, we never collect any sensitive info. AI PvP verification ensures a 100% human ecosystem (no bots). Future on-chain features will use zero-knowledge proofs (ZKPs) so you can prove your score without revealing anything. Your presence stays yours."
+            answer: "Yes, privacy is at the core. We only use your Telegram ID to link your presence ID, we never collect any sensitive info. AI PvP verification ensures a 100% human ecosystem (no bots). Future on-chain features will use zero-knowledge proofs (ZKPs) so you can prove your score without revealing anything. Your presence stays yours."
         },
         {
             question: "How do I (or my brand) get value from Bluewave?",
             answer: (
                 <>
-                    <p style={{ marginBottom: "12px" }}><strong>Users:</strong> Earn $BWAVE points for consistent participation (missions, streaks). Later convert to tokens or monetize your presence/skills in the marketplace.</p>
-                    <p style={{ marginBottom: "12px" }}><strong>Brands & Products:</strong> Sponsor targeted missions to get verifiable real human presence — better ROI than traditional ads, bot-free.</p>
-                    <p>Marketplace launches in Phase 2 — early partners get priority.</p>
+                    <p style={{ marginBottom: "12px" }}><strong>Users:</strong> Earn $BWAVE points for consistent participation (missions, streaks, networks). Later convert to tokens & also monetize your presence/skills in the marketplace.</p>
+                    <p style={{ marginBottom: "12px" }}><strong>Brands & Products:</strong> Sponsor targeted missions to get verifiable real human presence, better ROI than traditional attention metrics, bot-free, 100% human zone.</p>
+                    <p>Marketplace launches in Phase 2.  Early builders & partners get priority.</p>
                 </>
             )
         },

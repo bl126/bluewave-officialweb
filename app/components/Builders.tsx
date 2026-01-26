@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Container from "./core/Container";
 import GlassCard from "./core/GlassCard";
 import Badge from "./core/Badge";
@@ -33,23 +34,17 @@ export default function Builders({ onApply }: { onApply?: () => void }) {
                                 width: "80px",
                                 height: "80px",
                                 borderRadius: "50%",
-                                background: "linear-gradient(135deg, var(--bw-cyan-glow) 0%, transparent 100%)",
                                 border: "1px solid var(--bw-glass-border)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
                                 marginBottom: "20px",
                                 position: "relative",
                                 overflow: "hidden"
                             }}>
-                                <div style={{
-                                    width: "60%",
-                                    height: "60%",
-                                    borderRadius: "50%",
-                                    background: "var(--bw-accent)",
-                                    opacity: 0.2,
-                                    filter: "blur(12px)"
-                                }}></div>
+                                <Image
+                                    src="/founder pic.jpg"
+                                    alt="Reuben Ezema"
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                />
                             </div>
                             <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "flex-start", marginBottom: "8px" }}>
                                 <div style={{ fontSize: "20px", fontWeight: "600", color: "#FFF" }}>Reuben Ezema</div>

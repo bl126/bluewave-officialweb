@@ -12,12 +12,15 @@ export async function POST(req: NextRequest) {
         const { fullName, telegramHandle, xHandle, role, experience, portfolio, activityLevel, additionalInfo } = body;
 
         const botToken = process.env.TELEGRAM_BOT_TOKEN;
-        const chatId = process.env.TELEGRAM_CHAT_ID;
+        const chatIdsEnv = process.env.TELEGRAM_CHAT_ID;
 
-        if (!botToken || !chatId) {
+        if (!botToken || !chatIdsEnv) {
             console.error("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing from environment variables.");
             return NextResponse.json({ error: "Server configuration error. Please check environment variables." }, { status: 500 });
         }
+
+        // Split by comma and clean up whitespace
+        const chatIds = chatIdsEnv.split(",").map(id => id.trim()).filter(id => id.length > 0);
 
         const message = `
 🌊 *New Builder Application* 🌊
@@ -39,29 +42,42 @@ ${escapeMarkdown(portfolio)}
 ${escapeMarkdown(additionalInfo)}
     `.trim();
 
-        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: message,
-                parse_mode: "Markdown",
-            }),
-        });
+        // Send to all admins
+        const results = await Promise.allSettled(chatIds.map(async (chatId) => {
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: "Markdown",
+                }),
+            });
 
-        const result = await response.json();
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.description || "Unknown error");
+            }
+            return result;
+        }));
 
-        if (!response.ok) {
-            console.error("Telegram API Error:", result);
+        const failures = results.filter(r => r.status === "rejected");
+
+        if (failures.length === chatIds.length) {
+            // All failed
+            console.error("All Telegram API requests failed:", failures);
             return NextResponse.json({
-                error: `Telegram Error: ${result.description || "Unknown error"}`,
-                details: result
+                error: "All notification attempts failed",
+                details: failures.map((f: any) => f.reason.message) || "Unknown error"
             }, { status: 502 });
         }
 
-        return NextResponse.json({ success: true });
+        return NextResponse.json({
+            success: true,
+            partial_failure: failures.length > 0 ? failures.length : undefined
+        });
     } catch (error: any) {
         console.error("Builder Submission Route Error:", error);
         return NextResponse.json({ error: error.message || "Internal server error" }, { status: 500 });

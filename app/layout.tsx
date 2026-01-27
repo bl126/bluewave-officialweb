@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     description: "The Human Presence Layer on TON.",
   },
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/bluewave-icon.png",
+    apple: "/bluewave-icon.png",
   },
 };
 

@@ -26,7 +26,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bluewave — The Human Presence Layer on TON",
     description: "The Human Presence Layer on TON.",
-  }
+  },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

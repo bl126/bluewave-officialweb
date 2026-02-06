@@ -48,7 +48,7 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
                             <h4 style={{ fontSize: "13px", color: "#FFFFFF", marginBottom: "32px", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: "600" }}>Connect</h4>
                             <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
                                 {/* X Icon */}
-                                <a href="https://x.com/bluewavefx7" target="_blank" rel="noopener noreferrer" className="social-icon-glass">
+                                <a href="https://x.com/bwaveprotocol" target="_blank" rel="noopener noreferrer" className="social-icon-glass">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                     </svg>

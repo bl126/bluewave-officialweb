@@ -5,8 +5,8 @@ import Container from "./core/Container";
 
 export default function Stats() {
     const stats = [
-        { label: "Current total users", value: "250+" },
-        { label: "Current total countries", value: "17" },
+        { label: "Current total users", value: "300+" },
+        { label: "Current total countries", value: "18" },
         { label: "current total continents", value: "5" },
         { label: "Current total missions completed", value: "1000+" },
     ];

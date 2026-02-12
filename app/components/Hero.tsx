@@ -68,11 +68,18 @@ export default function Hero() {
               Bluewave turns real human consistency into verifiable user owned on-chain reputation. <br /> PresenceFi on TON.
             </p>
 
-            <div className="hero-cta-group" style={{ display: "flex", gap: "24px" }}>
+            <div className="hero-cta-group" style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
               <a href="https://t.me/Bluewave_Ecosystem_bot?start=ref_5023869471" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
                 <Button variant="primary">
-                  <Image src="/telegram-transparent.png" alt="Telegram" width={44} height={44} />
+                  <Image src="/telegram-transparent.png" alt="Telegram" width={32} height={32} />
                   <span>Launch Mini App</span>
+                </Button>
+              </a>
+
+              <a href="https://t.me/bwaveprotocol" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                <Button variant="primary">
+                  <Image src="/telegram-transparent.png" alt="Telegram" width={32} height={32} />
+                  <span>Join Community</span>
                 </Button>
               </a>
 

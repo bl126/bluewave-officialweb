@@ -100,9 +100,17 @@ export default function BuildersFormOverlay({ isOpen, onClose }: BuildersFormOve
                     <p style={{ color: "var(--bw-text-secondary)", lineHeight: 1.6, fontSize: "17px", marginBottom: "40px" }}>
                         Thank you! We've received your application. We'll review it within the next few days and DM you on Telegram if it's a fit. Keep building — consistency wins 🌊
                     </p>
-                    <Button variant="primary" onClick={onClose} style={{ width: "100%", justifyContent: "center" }}>
-                        <span>Back to Site</span>
-                    </Button>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                        <a href="https://t.me/bwaveprotocol" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                            <Button variant="primary" style={{ width: "100%", justifyContent: "center" }}>
+                                <img src="/telegram-transparent.png" alt="Telegram" width="24" height="24" />
+                                <span>Join Bluewave Tg Community</span>
+                            </Button>
+                        </a>
+                        <Button variant="secondary" onClick={onClose} style={{ width: "100%", justifyContent: "center" }}>
+                            <span>Back to Site</span>
+                        </Button>
+                    </div>
                 </div>
             </div>
         );

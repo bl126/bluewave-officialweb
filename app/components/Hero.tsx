@@ -76,13 +76,6 @@ export default function Hero() {
                 </Button>
               </a>
 
-              <a href="https://t.me/bwaveprotocol" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                <Button variant="primary">
-                  <Image src="/telegram-transparent.png" alt="Telegram" width={32} height={32} />
-                  <span>Join Community</span>
-                </Button>
-              </a>
-
               <Button
                 variant="secondary"
                 href="https://drive.google.com/file/d/1BVdfgYF2ap5KS9PrgMtqT9ptlBx6404c/view?usp=drivesdk"

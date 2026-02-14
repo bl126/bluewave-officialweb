@@ -55,10 +55,10 @@ export default function Header() {
 
                 <div className="header-actions" style={{ display: "flex", alignItems: "center", gap: "24px" }}>
                     <div className="hide-mobile">
-                        <a href="https://t.me/Bluewave_Ecosystem_bot?start=ref_5023869471" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                        <a href="https://t.me/bwaveprotocol" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
                             <Button variant="primary" style={{ padding: "12px 24px", fontSize: "14px" }}>
                                 <Image src="/telegram-transparent.png" alt="Telegram" width={18} height={18} />
-                                <span>Launch Mini App</span>
+                                <span>Join Community</span>
                             </Button>
                         </a>
                     </div>
@@ -123,9 +123,9 @@ export default function Header() {
                         {link.name}
                     </a>
                 ))}
-                <a href="https://t.me/Bluewave_Ecosystem_bot?start=ref_5023869471" target="_blank" rel="noopener noreferrer" style={{ width: "100%", textDecoration: "none" }}>
+                <a href="https://t.me/bwaveprotocol" target="_blank" rel="noopener noreferrer" style={{ width: "100%", textDecoration: "none" }}>
                     <Button variant="primary" style={{ marginTop: "20px", width: "100%" }}>
-                        <span>Launch Mini App</span>
+                        <span>Join Community</span>
                     </Button>
                 </a>
             </div>

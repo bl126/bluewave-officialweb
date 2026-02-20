@@ -1,15 +1,52 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "./core/Container";
 
+const BACKEND_URL = "https://bluewave-backend-wj70.onrender.com";
+
+interface StatsData {
+    total_users: number;
+    total_presence_vol: number;
+}
+
 export default function Stats() {
-    const stats = [
-        { label: "Current total users", value: "390+" },
-        { label: "Current total countries", value: "21" },
-        { label: "current total continents", value: "5" },
-        { label: "Current total missions completed", value: "3500+" },
-    ];
+    const [stats, setStats] = useState([
+        { label: "Total Users", value: "—" },
+        { label: "Active Countries", value: "21" },
+        { label: "Total Continents", value: "5" },
+        { label: "Missions Completed", value: "—" },
+    ]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchStats() {
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/v1/ledger/stats`);
+                if (!res.ok) throw new Error("Failed to fetch stats");
+                const data: StatsData = await res.json();
+
+                setStats([
+                    { label: "Total Users", value: data.total_users ? `${data.total_users.toLocaleString()}+` : "420+" },
+                    { label: "Active Countries", value: "21" },
+                    { label: "Total Continents", value: "5" },
+                    { label: "Missions Completed", value: data.total_presence_vol ? `${data.total_presence_vol.toLocaleString()}+` : "6,500+" },
+                ]);
+            } catch (err) {
+                console.error("Stats fetch error:", err);
+                // Fallback to hardcoded values
+                setStats([
+                    { label: "Total Users", value: "420+" },
+                    { label: "Active Countries", value: "21" },
+                    { label: "Total Continents", value: "5" },
+                    { label: "Missions Completed", value: "6,500+" },
+                ]);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchStats();
+    }, []);
 
     return (
         <section id="stats" className="section-padding" style={{ position: "relative" }}>
@@ -36,7 +73,16 @@ export default function Stats() {
                             textAlign: "center"
                         }}>
                             <div style={{ fontSize: "12px", color: "var(--bw-accent)", textTransform: "uppercase", letterSpacing: "0.25em", marginBottom: "24px", fontWeight: "600" }}>{stat.label}</div>
-                            <div style={{ fontSize: "52px", fontWeight: "500", color: "#FFFFFF", letterSpacing: "-0.04em" }}>{stat.value}</div>
+                            <div style={{
+                                fontSize: "52px",
+                                fontWeight: "500",
+                                color: "#FFFFFF",
+                                letterSpacing: "-0.04em",
+                                opacity: loading ? 0.3 : 1,
+                                transition: "opacity 0.5s ease"
+                            }}>
+                                {loading ? "..." : stat.value}
+                            </div>
                         </div>
                     ))}
                 </div>

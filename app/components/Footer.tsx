@@ -33,7 +33,7 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
 
                     <div className="footer-links-ecosystem" style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gridTemplateColumns: "repeat(3, 1fr)",
                         gap: "64px"
                     }}>
                         <div className="link-group">
@@ -42,6 +42,14 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
                                 <a href="#vision" className="footer-link-action">Vision</a>
                                 <a href="#how-it-works" className="footer-link-action">How It Works</a>
                                 <a href="#marketplace" className="footer-link-action">Marketplace</a>
+                            </div>
+                        </div>
+                        <div className="link-group">
+                            <h4 style={{ fontSize: "13px", color: "#FFFFFF", marginBottom: "32px", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: "600" }}>Products</h4>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                                <a href="http://bwavescan.xyz" target="_blank" rel="noopener noreferrer" className="footer-link-action">BwaveScan</a>
+                                <a href="http://bwavescan.xyz/api-docs" target="_blank" rel="noopener noreferrer" className="footer-link-action">API Documentation</a>
+                                <a href="http://bwavescan.xyz/whitepaper" target="_blank" rel="noopener noreferrer" className="footer-link-action">BwaveScan Whitepaper</a>
                             </div>
                         </div>
                         <div className="link-group">

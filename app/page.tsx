@@ -6,6 +6,7 @@ import Hero from "./components/Hero";
 import Vision from "./components/Vision";
 import HowItWorks from "./components/HowItWorks";
 import Marketplace from "./components/Marketplace";
+import BwaveScan from "./components/BwaveScan";
 import Builders from "./components/Builders";
 import Stats from "./components/Stats";
 import FAQ from "./components/FAQ";
@@ -31,6 +32,9 @@ export default function Home() {
 
       <div className="divider-glow"></div>
       <HowItWorks />
+
+      <div className="divider-glow"></div>
+      <BwaveScan />
 
       <div className="divider-glow"></div>
       <Marketplace />

@@ -143,6 +143,24 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
           transform: translateY(-4px);
           box-shadow: 0 10px 20px rgba(0, 246, 255, 0.15);
         }
+        @media (max-width: 768px) {
+          .footer-layout {
+            grid-template-columns: 1fr !important;
+            gap: 48px !important;
+          }
+          .footer-links-ecosystem {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 32px !important;
+          }
+          .footer-bottom-tier {
+            flex-direction: column !important;
+            text-align: center;
+            gap: 16px !important;
+          }
+          .footer-legal {
+            justify-content: center;
+          }
+        }
       `}</style>
         </footer>
     );

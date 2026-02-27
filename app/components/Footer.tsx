@@ -50,6 +50,7 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
                                 <a href="http://bwavescan.xyz" target="_blank" rel="noopener noreferrer" className="footer-link-action">BwaveScan</a>
                                 <a href="http://bwavescan.xyz/api-docs" target="_blank" rel="noopener noreferrer" className="footer-link-action">API Documentation</a>
                                 <a href="http://bwavescan.xyz/whitepaper" target="_blank" rel="noopener noreferrer" className="footer-link-action">BwaveScan Whitepaper</a>
+                                <a href="/brandassets" className="footer-link-action">Brand Assets</a>
                             </div>
                         </div>
                         <div className="link-group">

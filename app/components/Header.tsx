@@ -31,12 +31,12 @@ export default function Header() {
     }, [docsOpen]);
 
     const navLinks = [
-        { name: "Vision", href: "#vision" },
-        { name: "How It Works", href: "#how-it-works" },
-        { name: "BwaveScan", href: "#bwavescan" },
-        { name: "Marketplace", href: "#marketplace" },
-        { name: "Builders", href: "#builders" },
-        { name: "FAQ", href: "#faq" },
+        { name: "Vision", href: "/#vision" },
+        { name: "How It Works", href: "/#how-it-works" },
+        { name: "BwaveScan", href: "/#bwavescan" },
+        { name: "Marketplace", href: "/#marketplace" },
+        { name: "Builders", href: "/#builders" },
+        { name: "FAQ", href: "/#faq" },
     ];
 
     const docsLinks = [

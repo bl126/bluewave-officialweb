@@ -39,9 +39,9 @@ export default function Footer({ onOpenLegal }: { onOpenLegal?: (type: "terms" |
                         <div className="link-group">
                             <h4 style={{ fontSize: "13px", color: "#FFFFFF", marginBottom: "32px", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: "600" }}>Protocol</h4>
                             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                                <a href="#vision" className="footer-link-action">Vision</a>
-                                <a href="#how-it-works" className="footer-link-action">How It Works</a>
-                                <a href="#marketplace" className="footer-link-action">Marketplace</a>
+                                <a href="/#vision" className="footer-link-action">Vision</a>
+                                <a href="/#how-it-works" className="footer-link-action">How It Works</a>
+                                <a href="/#marketplace" className="footer-link-action">Marketplace</a>
                             </div>
                         </div>
                         <div className="link-group">

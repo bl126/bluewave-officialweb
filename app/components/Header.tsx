@@ -53,7 +53,7 @@ export default function Header() {
                 alignItems: "center",
                 maxWidth: "var(--container-header)"
             }}>
-                <a href="#" className="logo">
+                <a href="/" className="logo">
                     <Image src="/bluewave-icon.png" alt="Bluewave" width={32} height={32} />
                     <span className="logo-text hide-mobile">Bluewave</span>
                 </a>
